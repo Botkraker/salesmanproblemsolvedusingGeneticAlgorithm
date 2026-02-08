@@ -1,4 +1,3 @@
-from math import inf
 
 
 class Salesman:
@@ -22,13 +21,9 @@ class Salesman:
         currentnode = self.startNode
         traveledDistance = 0
         for nextnode in route:
-            traveledDistance += currentnode.goToNeighbor(nextnode)
+            traveledDistance += currentnode.goToNode(self.nodes[nextnode])
             currentnode = self.nodes[nextnode]
-        try:
-            traveledDistance += currentnode.goToNeighbor(self.startNode.name)
-        except Exception:
-            print("this route doesn't end at the starting point")
-            return inf
+        traveledDistance += currentnode.goToNode(self.startNode)
         return traveledDistance
 
     def getNodeByName(self, name):

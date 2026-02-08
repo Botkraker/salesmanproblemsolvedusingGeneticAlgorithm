@@ -21,6 +21,6 @@ class Generation:
     def firstGeneration(numberOfSolution=500):
         gen=[]
         for _ in range(numberOfSolution):
-            
+            pass   
         return Generation(gen)
 

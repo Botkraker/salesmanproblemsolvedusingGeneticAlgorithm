@@ -1,10 +1,10 @@
 from node import Node 
 from salesman import Salesman
 
-A = Node('A', {"B": 10, "C": 15, "D": 20})
-B = Node('B', {'A': 10, 'C': 35, 'D': 25})
-C = Node('C', {'A': 15, 'B': 35, 'D': 30})
-D = Node('D', {'A': 20, 'B': 25, 'C': 30})
+A = Node('A', (0,0)) 
+B = Node('B', (5,5))
+C = Node('C', (4,-6))
+D = Node('D', (8,8))
 
 nodes = {
     'A': A,
@@ -20,7 +20,7 @@ routes = [
     ['C', 'B', 'D'],
     ['D', 'B', 'C'],
     ['B', 'D', 'C'],
-    ['B', 'C'],         # invalid (does not return properly)
+    ['B', 'C'],        
 ]
 
 for r in routes:
