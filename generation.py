@@ -5,7 +5,6 @@ from salesman import Salesman
 
 
 class Generation:
-    salesman = Salesman()
     # solutions= [solution...]
 
     def __init__(self, solutions: List[Solution]):
@@ -17,8 +16,8 @@ class Generation:
 
     def nextGeneration(self):
         newGeneration = []
-        parentPool = self.solutions[:len(self.solutions)]
-        while len(parentPool) < 3:
+        parentPool = self.solutions[:len(self.solutions)//2]
+        while len(parentPool) > 3:
             firstparent = random.randint(0, 3)
             secondparent = random.randint(0, 3)
             child=self.solutions[firstparent].produce(
@@ -28,12 +27,19 @@ class Generation:
             parentPool.pop(firstparent)
             parentPool.pop(secondparent)
         return Generation(newGeneration+self.solutions[:len(parentPool)])
-
+    def show(self):
+        print("My 20 best-Performing Children : ",end="")
+        for index,solution in enumerate(self.solutions[:20]):
+            print(f"{index}:",end="")
+            print(solution)
+            solution.show()
     def firstGeneration(numberOfSolution=None):
-        names=Salesman.getNodeNames()
+        names=Salesman().getNodeNames()
         if numberOfSolution == None:
-            numberOfSolution = len(names)/2
+            numberOfSolution = len(names)
         gen = []
         for _ in range(numberOfSolution):
-            gen.append(random.shuffle(names))
+            l=names
+            random.shuffle(l)
+            gen.append(Solution(l))
         return Generation(gen)

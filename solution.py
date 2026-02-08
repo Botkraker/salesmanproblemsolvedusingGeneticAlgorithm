@@ -5,12 +5,11 @@ from salesman import Salesman
 
 
 class Solution:
-    salesman = Salesman()
     # route=[names...], distance int
 
-    def __init__(self, route:List[str], distance:int):
+    def __init__(self, route:List[str]):
         self.route = route
-        self.distance = distance
+        self.distance :int=None
 
     def produce(self, parent):
         childsroute = []
@@ -31,4 +30,6 @@ class Solution:
             0, len(route))
         route[x], route[y] = route[y], route[x]
     def testSolution(self):
-        self.distance = Salesman.testRoute(self.route)
+        self.distance = Salesman().testRoute(self.route)
+    def show(self):
+        print("{Route:",self.route,",Distance:",self.distance,"}",end="")

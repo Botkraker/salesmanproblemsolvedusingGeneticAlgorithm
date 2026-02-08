@@ -7,22 +7,30 @@ from node import Node
 
 class Salesman:
     _instance = None
-    # nodes= {name:node...}
 
     def __new__(cls, *args, **kwargs):
         if cls._instance is None:
             cls._instance = super().__new__(cls)
+            cls._instance._initialized = False
         return cls._instance
 
-    def __init__(self, nodes: dict[str,List[Node]], startNode: Node):
-        if hasattr(self, '_initialized') and self._initialized:
+    # nodes= {name:node...}
+    def __init__(self, nodes:dict[str,Node]=None, startNode:Node=None):
+        if self._initialized:
             return
 
-        self.startNode = startNode
+        if nodes is not None and startNode is not None:
+            self.initialize(nodes, startNode)
+
+    def initialize(self, nodes:dict[str,Node], startNode:Node):
+        if self._initialized:
+            return
+
         self.nodes = nodes
+        self.startNode = startNode
         self._initialized = True
 
-    def testRoute(self, route:List[str]):
+    def testRoute(self, route: List[str]):
         currentnode = self.startNode
         traveledDistance = 0
         for nextnode in route:
@@ -37,7 +45,9 @@ class Salesman:
         return self.nodes[name]
 
     def getNodeNames(self):
-        return self.nodes.keys()
+        l=list(self.nodes.keys())
+        l.remove(self.startNode.name)
+        return l
 
     def getStartNode(self):
-        return self.firstNode
+        return self.startNode

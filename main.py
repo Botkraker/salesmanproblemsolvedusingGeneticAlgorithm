@@ -1,5 +1,6 @@
 from node import Node 
 from salesman import Salesman
+from genetics import GeneticsAlgorithm
 
 A = Node('A', (0,0)) 
 B = Node('B', (5,5))
@@ -14,14 +15,15 @@ nodes = {
 }
 
 s = Salesman(nodes, A)
+g=GeneticsAlgorithm()
+g.run()
+# routes = [
+#     ['B', 'C', 'D'],
+#     ['C', 'B', 'D'],
+#     ['D', 'B', 'C'],
+#     ['B', 'D', 'C'],
+#     ['B', 'C'],        
+# ]
 
-routes = [
-    ['B', 'C', 'D'],
-    ['C', 'B', 'D'],
-    ['D', 'B', 'C'],
-    ['B', 'D', 'C'],
-    ['B', 'C'],        
-]
-
-for r in routes:
-    print(f'Route A -> {r} -> A = {s.testRoute(r)}')
+# for r in routes:
+#     print(f'Route A -> {r} -> A = {s.testRoute(r)}')
