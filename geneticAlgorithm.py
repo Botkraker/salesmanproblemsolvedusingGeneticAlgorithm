@@ -80,9 +80,7 @@ class GA:
             newPop.append(child)
 
         self.population = newPop
-        # Find best in current population
         current_best = min(self.population, key=self.routeDistance)
-        # Keep the best across generations
         if self.best is None or self.routeDistance(current_best) < self.routeDistance(self.best):
             self.best = current_best
         return self.best

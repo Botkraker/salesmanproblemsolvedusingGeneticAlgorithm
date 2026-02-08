@@ -10,7 +10,6 @@ class GAVis:
         self.ga.initPopulation()
         self.generation = 0
 
-        # Use Toplevel if master is provided, else fallback to Tk
         if master:
             self.root = tk.Toplevel(master)
         else:
@@ -36,12 +35,10 @@ class GAVis:
         self.leaderboard_frame.pack(pady=5)
         self.draw()
 
-        # Bind close event to ensure app exits
         self.root.protocol("WM_DELETE_WINDOW", self.on_close)
 
     def on_close(self):
         self.root.destroy()
-        # If this is the last window, exit the app
         try:
             import sys
             sys.exit(0)
@@ -68,7 +65,6 @@ class GAVis:
 
         self.canvas.draw()
 
-        # Update leaderboard
         for widget in self.leaderboard_frame.winfo_children():
             widget.destroy()
         tk.Label(self.leaderboard_frame, text="Leaderboard (Top 5)", font=("Arial", 12, "bold")).pack()
