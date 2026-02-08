@@ -1,9 +1,7 @@
 from math import inf
 
-from node import node
 
-
-class salesman:
+class Salesman:
     _instance = None
     # nodes= {name:node...}
 
@@ -33,4 +31,11 @@ class salesman:
             return inf
         return traveledDistance
 
-    
+    def getNodeByName(self, name):
+        if name not in self.nodes.keys():
+            raise Exception("NameNode doesn't exists")
+        return self.nodes[name]
+    def getNodeNames(self):
+        return self.nodes.keys()
+    def getStartNode(self):
+        return self.firstNode

@@ -1,26 +1,12 @@
-import random
+from generation import Generation
 
-from salesman import salesman
+class GeneticsAlgorithm:
+    # FirstGeneration is optional if you want to set the first generation instead of random generation
+    def __init__(self, firstgeneration=None):
+        if firstgeneration != None:
+            self.generations = [firstgeneration]
+        else:
+            self.generations = [Generation.firstGeneration()]
 
-
-class solution:
-    # route=[names...], distance int
-    def __init__(self, route, distance):
-        self.route = route
-        self.distance = distance
-
-    def produce(self, parent):
-        childsroute = []
-        for index, currentNode in enumerate(self.route):
-            if currentNode == parent.route[index]:
-                childsroute.append(currentNode)
-            else:
-                childsroute.append()
-
-
-class generation:
-    # solutions= [solution...]
-    def __init__(self, solutions):
-        self.solutions = solutions
-
-    # def
+    def run():
+        pass

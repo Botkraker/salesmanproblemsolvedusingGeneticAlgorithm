@@ -1,13 +1,10 @@
-
-
-class node:
-    # neighbors = {"name" : distance}
-    def __init__(self, name, neighbors):
+import math
+class Node:
+    def __init__(self, name, coords):
         self.name = name
-        self.neighbors = neighbors
+        self.coords= coords
 
-    def goToNeighbor(self, name):
-        if name in self.neighbors.keys():
-            return self.neighbors[name]
-        else:
-            raise Exception(f"{name} is not a neighbor")
+    def goToNode(self, nextNode):
+        return math.sqrt((self.coords[0]-nextNode.coords[0])**2+((self.coords[1]-nextNode.coords[1])**2))
+    def getMinDistanceNeighbor(self):
+        return min(self.neighbors)
