@@ -1,6 +1,6 @@
 import random
 from solution import Solution
-from typing import List
+from typing import List, Optional
 from salesman import Salesman
 
 
@@ -45,14 +45,14 @@ class Generation:
             print(f"{index}:", end="")
             solution.show()
         print()
-
-    def firstGeneration(numberOfSolution=None):
+    @staticmethod
+    def firstGeneration(popSize:Optional[int]=None):
         names = Salesman().getNodeNames()
-        if numberOfSolution == None:
-            numberOfSolution = len(names)
+        if popSize is None:
+            popSize = len(names)
         gen = []
-        for _ in range(numberOfSolution):
-            l = names
-            random.shuffle(l)
-            gen.append(Solution(l))
+        for _ in range(popSize):
+            lNames = names[:]
+            random.shuffle(lNames)
+            gen.append(Solution(lNames))
         return Generation(gen)
