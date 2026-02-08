@@ -9,4 +9,4 @@ class GeneticsAlgorithm:
             self.generations = [Generation.firstGeneration()]
 
     def run():
-        pass
+        

@@ -1,10 +1,14 @@
 import math
+from typing import Tuple
+
+
 class Node:
-    def __init__(self, name, coords):
+    def __init__(self, name: str, coords:Tuple[int,str]):
         self.name = name
-        self.coords= coords
+        self.coords = coords
 
     def goToNode(self, nextNode):
         return self.distance(nextNode)
-    def distance(self, nextNode): 
+
+    def distance(self, nextNode):
         return math.sqrt((self.coords[0]-nextNode.coords[0])**2+((self.coords[1]-nextNode.coords[1])**2))

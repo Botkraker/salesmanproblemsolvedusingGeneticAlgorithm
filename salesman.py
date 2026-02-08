@@ -1,5 +1,10 @@
 
 
+from typing import List
+
+from node import Node
+
+
 class Salesman:
     _instance = None
     # nodes= {name:node...}
@@ -9,7 +14,7 @@ class Salesman:
             cls._instance = super().__new__(cls)
         return cls._instance
 
-    def __init__(self, nodes, startNode):
+    def __init__(self, nodes: dict[str,List[Node]], startNode: Node):
         if hasattr(self, '_initialized') and self._initialized:
             return
 
@@ -17,7 +22,7 @@ class Salesman:
         self.nodes = nodes
         self._initialized = True
 
-    def testRoute(self, route):
+    def testRoute(self, route:List[str]):
         currentnode = self.startNode
         traveledDistance = 0
         for nextnode in route:
@@ -30,7 +35,9 @@ class Salesman:
         if name not in self.nodes.keys():
             raise Exception("NameNode doesn't exists")
         return self.nodes[name]
+
     def getNodeNames(self):
         return self.nodes.keys()
+
     def getStartNode(self):
         return self.firstNode
