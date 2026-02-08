@@ -7,9 +7,9 @@ from salesman import Salesman
 class Solution:
     # route=[names...], distance int
 
-    def __init__(self, route:List[str]):
+    def __init__(self, route: List[str]):
         self.route = route
-        self.distance :int=None
+        self.distance: int = None
 
     def produce(self, parent):
         childsroute = []
@@ -24,12 +24,14 @@ class Solution:
                          currentNode
                          ]))
         return Solution(route=childsroute)
-    def mutate(self,route):
+
+    def mutate(self):
         # simple mutation
-        x, y = random.randint(0, len(route)), random.randint(
-            0, len(route))
-        route[x], route[y] = route[y], route[x]
+        x, y = random.sample(range(len(self.route)), 2)
+        self.route[x], self.route[y] = self.route[y], self.route[x]
+
     def testSolution(self):
         self.distance = Salesman().testRoute(self.route)
+
     def show(self):
-        print("{Route:",self.route,",Distance:",self.distance,"}",end="")
+        print("{Route:", self.route, ",Distance:", self.distance, "}", end="")

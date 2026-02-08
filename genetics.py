@@ -9,10 +9,10 @@ class GeneticsAlgorithm:
         else:
             self.generations:List[Generation] = [Generation.firstGeneration()]
     def show(self):
-        print("Generation N:",len(self.generations))
-        self.generations[-1].show()
+        print("Generation N:",len(self.generations)-1)
+        self.generations[-2].show()
     def run(self):
-        while (True):
+        for i in range(10):
             self.generations.append(self.generations[-1].nextGeneration())
             self.show()
 
