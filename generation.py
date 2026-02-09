@@ -45,6 +45,10 @@ class Generation:
             print(f"{index}:", end="")
             solution.show()
         print()
+    def get_top_routes(self,num:int):
+        self.sortByBestPerformingSolution()
+        return self.solutions[:num]
+    def 
     @staticmethod
     def firstGeneration(popSize:Optional[int]=None):
         names = Salesman().getNodeNames()
