@@ -52,11 +52,11 @@ class GAVis:
 
         colors = ["red", "blue", "green", "orange", "purple"]
         top_routes = self.generation.get_top_routes(5)
-        for idx, solution in enumerate(top_routes):
+        for i, solution in enumerate(top_routes):
             r = solution.route
             edges = [(r[i], r[i+1]) for i in range(len(r)-1)]
             edges.append((r[-1], r[0]))
-            nx.draw_networkx_edges(self.G, self.pos, edgelist=edges, edge_color=colors[idx], width=2, ax=self.ax, alpha=0.5 if idx > 0 else 1.0)
+            nx.draw_networkx_edges(self.G, self.pos, edgelist=edges, edge_color=colors[i], width=2, ax=self.ax, alpha=0.5 if i > 0 else 1.0)
 
         best = top_routes[0]
         if best:
@@ -70,13 +70,13 @@ class GAVis:
         for widget in self.leaderboard_frame.winfo_children():
             widget.destroy()
         tk.Label(self.leaderboard_frame, text="Leaderboard (Top 5)", font=("Arial", 12, "bold")).pack()
-        for idx, r in enumerate(top_routes):
+        for i, r in enumerate(top_routes):
             dist = r.testSolution()
             route_str = " → ".join(r.route)
             tk.Label(
                 self.leaderboard_frame,
-                text=f"{idx+1}. {route_str} | Distance: {dist:.2f}",
-                fg=colors[idx],
+                text=f"{i+1}. {route_str} | Distance: {dist:.2f}",
+                fg=colors[i],
                 font=("Arial", 10)
             ).pack(anchor="w")
 
