@@ -34,6 +34,7 @@ class Solution:
 
     def testSolution(self):
         self.distance = Salesman().testRoute(self.route)
+        return self.distance 
 
     def show(self):
         print("{Route:", self.route, ",Distance:", self.distance, "}", end="")

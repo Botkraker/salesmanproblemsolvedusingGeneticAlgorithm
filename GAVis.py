@@ -22,7 +22,7 @@ class GAVis:
         self.canvas.get_tk_widget().pack()
 
         self.G = nx.Graph()
-        self.pos = {name: (city.x, city.y) for name, city in .items()}
+        self.pos = {name: (city.coords[0], city.coords[1]) for name, city in ga.items()}
         self.G.add_nodes_from(self.pos.keys())
 
         btn_frame = tk.Frame(self.root)
@@ -53,15 +53,14 @@ class GAVis:
         colors = ["red", "blue", "green", "orange", "purple"]
         top_routes = self.generation.get_top_routes(5)
         for i, solution in enumerate(top_routes):
-            r = solution.route
+            r = ["A"]+solution.route
             edges = [(r[i], r[i+1]) for i in range(len(r)-1)]
             edges.append((r[-1], r[0]))
             nx.draw_networkx_edges(self.G, self.pos, edgelist=edges, edge_color=colors[i], width=2, ax=self.ax, alpha=0.5 if i > 0 else 1.0)
 
         best = top_routes[0]
         if best:
-            dist = best.testSolution()
-            self.ax.set_title(f"Generation {self.generationNum} | Best Distance: {dist:.2f}")
+            self.ax.set_title(f"Generation {self.generationNum}")
         else:
             self.ax.set_title("Generation 0")
 
@@ -75,15 +74,16 @@ class GAVis:
             route_str = " → ".join(r.route)
             tk.Label(
                 self.leaderboard_frame,
-                text=f"{i+1}. {route_str} | Distance: {dist:.2f}",
+                text=f"{i+1}. {route_str}",
                 fg=colors[i],
                 font=("Arial", 10)
             ).pack(anchor="w")
 
     def next_gen(self):
         self.generationNum += 1
-        best = self.generation.nextGeneration()
-        self.draw(best)
+        self.generation = self.generation.nextGeneration()
+
+        self.draw()
 
     def auto_run(self):
         for _ in range(10):
