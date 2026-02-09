@@ -12,18 +12,18 @@ class Solution:
         self.distance: float = 0
 
     def produce(self, parent):
-        childroute= [str | None] * len(self.route)
-        childroute[0]= self.route[0]
-        s= random.randint(1,len(self.route)-2)
-        e = random.randint(s,len(self.route)-1)
-        childroute[s:e]=self.route[s:e]
-        setChildNodes=set(self.route[s:e])
-        fill = [n for n in parent.route if n not in setChildNodes]
-        i =0
-        for n in fill:
-            while childroute[i] is not None:
-                i+=1
-            childroute[i]=n
+        childroute= [None] * len(self.route)
+        start= random.randint(1,len(self.route)-2)
+        end = random.randint(start,len(self.route)-1)
+        childroute[start:end]=self.route[start:end]
+        setChildNodes=set(self.route[start:end])
+        genesMissing = [n for n in parent.route if n not in setChildNodes]
+
+        index =0
+        for gene in genesMissing:
+            while childroute[index] is not None:
+                index+=1
+            childroute[index]=gene
         return Solution(route=childroute)
     
     def mutate(self,factor=0.1):
